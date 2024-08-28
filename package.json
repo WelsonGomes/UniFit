@@ -1,0 +1,26 @@
+{
+  "name": "unifit",
+  "version": "1.0.0",
+  "description": "API da academia UniFit",
+  "main": "index.js",
+  "scripts": {
+    "start": "node build/server.js",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc"
+  },
+  "author": "Welson Douglas Oliveira Gomes",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
