@@ -16,7 +16,9 @@ async function createPeople(req: Request, res: Response) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
     } finally {
+        console.log('Desconectando conexão do prisma');
         req.prisma.$disconnect();
+        console.log('Prisma desconectado com sucesso');
     }
 }
 
@@ -36,7 +38,9 @@ async function selectPeople(req: Request, res: Response) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
     } finally {
+        console.log('Desconectando conexão do prisma');
         req.prisma.$disconnect();
+        console.log('Prisma desconectado com sucesso');
     }
 }
 
@@ -50,7 +54,9 @@ async function updatePeople(req: Request, res: Response) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
     } finally {
+        console.log('Desconectando conexão do prisma');
         req.prisma.$disconnect();
+        console.log('Prisma desconectado com sucesso');
     }
 }
 
@@ -63,7 +69,9 @@ async function deletePeople(req: Request, res: Response) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
     } finally {
+        console.log('Desconectando conexão do prisma');
         req.prisma.$disconnect();
+        console.log('Prisma desconectado com sucesso');
     }
 }
 
