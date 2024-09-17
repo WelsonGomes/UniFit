@@ -28,8 +28,10 @@ app.get('/',(req: Request, res: Response) => {
 app.post('/login');
 app.use(route);
 app.use(async (req: Request, res: Response, next: NextFunction) => {
+    console.log('Finalizando a conexão do prisma')
     res.on('finish', async () => {
         await req.prisma.$disconnect();
+        console.log('Conexão finalizada');
     });
     next();
 });
