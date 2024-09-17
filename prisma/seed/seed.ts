@@ -4,6 +4,8 @@ import { publicStates } from "./execute/state";
 import { peopleType } from "./execute/people";
 import * as fs from 'fs';
 import * as path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const prisma = new PrismaClient();
 
