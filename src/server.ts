@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -27,6 +27,12 @@ app.get('/',(req: Request, res: Response) => {
 });
 app.post('/login');
 app.use(route);
+app.use(async (req: Request, res: Response, next: NextFunction) => {
+    res.on('finish', async () => {
+        await req.prisma.$disconnect();
+    });
+    next();
+});
 
 app.listen(port, ()=>{
     console.log(`App Running on port ${port}`);
