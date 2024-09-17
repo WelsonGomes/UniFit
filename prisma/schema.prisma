@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pessoa {
+  id Int @id @default(autoincrement())
+  codigo Int
+  nome String @db.VarChar(50)
+  sobrenome String @db.VarChar(50)
+  cpf String @db.VarChar(11) @unique
+  datanascimento DateTime
+  sexo Int
+  tipofisicoid Int?
+  tipofisico TipoFisico? @relation(fields: [tipofisicoid], references: [id])
+  nivelatividadeid Int?
+  nivelatividade NivelAtividade? @relation(fields: [nivelatividadeid], references: [id])
+  objetivoid Int?
+  objetivo Objetivo? @relation(fields: [objetivoid], references: [id])
+  situacao Int 
+  tipopessoaid Int
+  tipopessoa TipoPessoa @relation(fields: [tipopessoaid], references: [id])
+  contato Contato[]
+  endereco Endereco[]
+  usuario Usuario[]
+
+  @@map("tbpessoa")
+}
+
+model TipoFisico {
+  id Int @id @default(autoincrement())
+  descricao String @db.VarChar(50)
+  pessoa Pessoa[]
+
+  @@map("tbtipofisico")
+}
+
+model NivelAtividade {
+  id Int @id @default(autoincrement())
+  descricao String @db.VarChar(50)
+  pessoa Pessoa[]
+
+  @@map("tbnivelatividade")
+}
+
+model Objetivo {
+  id Int @id @default(autoincrement())
+  descricao String @db.VarChar(50)
+  pessoa Pessoa[]
+
+  @@map("tbobjetivo")
+}
+
+model Contato {
+  id Int @id @default(autoincrement())
+  pessoaid Int
+  pessoa Pessoa @relation(fields: [pessoaid], references: [id])
+  telefone String? @db.VarChar(10)
+  celular String? @db.VarChar(11)
+  email String? @db.VarChar(100) @unique
+
+  @@map("tbcontato")
+}
+
+model Endereco {
+  id Int @id @default(autoincrement())
+  pessoaid Int
+  pessoa Pessoa @relation(fields: [pessoaid], references: [id])
+  cep String @db.VarChar(8)
+  rua String
+  numero String?
+  cidadeid Int
+  cidade Cidade @relation(fields: [cidadeid], references: [id])
+  bairro String
+  estadoid Int
+  estado Estado @relation(fields: [estadoid], references: [id])
+  complemento String
+
+  @@map("tbendereco")
+}
+
+model TipoPessoa {
+  id Int @id @default(autoincrement())
+  descricao String @db.VarChar(100) @unique
+  pessoa Pessoa[]
+
+  @@map("tbtipopessoa")
+}
+
+model Usuario {
+  id Int @id @default(autoincrement())
+  pessoaid Int
+  pessoa Pessoa @relation(fields: [pessoaid], references: [id])
+  permissao String
+  usuario String @db.VarChar(50)
+  password String
+  dtacadastro DateTime
+
+  @@map("tbusuario")
+}
+
+model Estado {
+  id Int @id @default(autoincrement())
+  nome String @db.VarChar(100) @unique
+  uf String @db.VarChar(2) @unique
+  pais String @db.VarChar(100)
+  cidade Cidade[]
+  endereco Endereco[]
+
+  @@map("tbestado")
+}
+
+model Cidade {
+  id Int @id @default(autoincrement())
+  nome String @db.VarChar(100)
+  estadoid Int
+  estado Estado @relation(fields: [estadoid], references: [id])
+  codigoibge Int
+  endereco Endereco[]
+
+  @@unique([nome, estadoid])
+  @@map("tbcidade")
+}
