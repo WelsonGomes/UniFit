@@ -15,6 +15,8 @@ async function createPeople(req: Request, res: Response) {
     } catch (error) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
+    } finally {
+        req.prisma.$disconnect();
     }
 }
 
@@ -33,6 +35,8 @@ async function selectPeople(req: Request, res: Response) {
     } catch (error) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
+    } finally {
+        req.prisma.$disconnect();
     }
 }
 
@@ -45,6 +49,8 @@ async function updatePeople(req: Request, res: Response) {
     } catch (error) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
+    } finally {
+        req.prisma.$disconnect();
     }
 }
 
@@ -56,6 +62,8 @@ async function deletePeople(req: Request, res: Response) {
     } catch (error) {
         console.log(error);
         return res.status(500).json({msg: 'Houve uma falha crítica no servidor, tente novamente em alguns instantes'});
+    } finally {
+        req.prisma.$disconnect();
     }
 }
 
