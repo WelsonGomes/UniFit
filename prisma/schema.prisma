@@ -24,9 +24,10 @@ model Pessoa {
   situacao Int 
   tipopessoaid Int
   tipopessoa TipoPessoa @relation(fields: [tipopessoaid], references: [id])
-  contato Contato[]
-  endereco Endereco[]
-  usuario Usuario[]
+  datacadastro DateTime @default(now())
+  contato Contato? @relation(name: "PessoaToContato")
+  endereco Endereco? @relation(name: "PessoaToEndereco")
+  usuario Usuario? @relation(name: "PessoaToUsuario")
 
   @@map("tbpessoa")
 }
@@ -57,19 +58,19 @@ model Objetivo {
 
 model Contato {
   id Int @id @default(autoincrement())
-  pessoaid Int
-  pessoa Pessoa @relation(fields: [pessoaid], references: [id])
+  pessoaid Int @unique
+  pessoa Pessoa @relation(fields: [pessoaid], references: [id], name: "PessoaToContato")
   telefone String? @db.VarChar(10)
   celular String? @db.VarChar(11)
-  email String? @db.VarChar(100) @unique
+  email String @db.VarChar(100) @unique
 
   @@map("tbcontato")
 }
 
 model Endereco {
   id Int @id @default(autoincrement())
-  pessoaid Int
-  pessoa Pessoa @relation(fields: [pessoaid], references: [id])
+  pessoaid Int @unique
+  pessoa Pessoa @relation(fields: [pessoaid], references: [id], name: "PessoaToEndereco")
   cep String @db.VarChar(8)
   rua String
   numero String?
@@ -93,8 +94,8 @@ model TipoPessoa {
 
 model Usuario {
   id Int @id @default(autoincrement())
-  pessoaid Int
-  pessoa Pessoa @relation(fields: [pessoaid], references: [id])
+  pessoaid Int @unique
+  pessoa Pessoa @relation(fields: [pessoaid], references: [id], name: "PessoaToUsuario")
   permissao String
   usuario String @db.VarChar(50)
   password String

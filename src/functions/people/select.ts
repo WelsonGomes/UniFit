@@ -1,7 +1,7 @@
 import { Request, Response} from 'express';
 import { PrismaClient } from "@prisma/client";
 import dotenv from 'dotenv';
-import { PessoaDTO } from '../../model/interface';
+import { ContatoDTO, PessoaDTO } from '../../model/interface';
 dotenv.config();
 
 async function SelectPeople(prisma: PrismaClient, req: Request, res: Response, skip: number, take: number, id: number, type: number) {
@@ -29,7 +29,8 @@ async function SelectPeople(prisma: PrismaClient, req: Request, res: Response, s
                             }
                         }
                     }
-                } 
+                },
+                usuario: true
             }
         });
         if(!people){
@@ -63,8 +64,43 @@ async function SelectPeople(prisma: PrismaClient, req: Request, res: Response, s
                     id: dados.tipopessoa.id,
                     descricao: dados.tipopessoa.descricao
                 },
-                contato: null,
-                endereco: null
+                contato: {
+                    id: dados.contato?.id ?? 0,
+                    pessoaid: dados.contato?.pessoaid ?? 0,
+                    telefone: dados.contato?.telefone ?? null,
+                    celular: dados.contato?.celular ?? null,
+                    email: dados.contato?.email ?? ""
+                },
+                endereco: dados.endereco ? {
+                    id: dados.endereco.id,
+                    pessoaid: dados.endereco.pessoaid,
+                    cep: dados.endereco.cep,
+                    rua: dados.endereco.rua,
+                    numero: dados.endereco.numero ?? null,
+                    cidadeid: dados.endereco.cidadeid,
+                    cidade: {
+                        id: dados.endereco.cidade.id,
+                        nome: dados.endereco.cidade.nome,
+                        estado: {
+                            id: dados.endereco.cidade.estado.id,
+                            nome: dados.endereco.cidade.estado.nome,
+                            uf: dados.endereco.cidade.estado.uf,
+                            pais: dados.endereco.cidade.estado.pais
+                        },
+                        codigoibge: dados.endereco.cidade.codigoibge
+                    },
+                    bairro: dados.endereco.bairro,
+                    estadoid: dados.endereco.estadoid,
+                    complemento: dados.endereco.complemento
+                }: null,
+                usuario: {
+                    id: dados.usuario?.id ?? 0,
+                    pessoaid: dados.usuario?.pessoaid ?? 0,
+                    permissao: dados.usuario?.permissao ?? "",
+                    usuario: "",
+                    password: "",
+                    dtacadastro: dados.usuario?.dtacadastro ?? new Date(Date.now())
+                }
             }
         });
         console.log('Processo concluido');

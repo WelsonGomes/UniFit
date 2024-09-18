@@ -6,14 +6,18 @@ export interface PessoaDTO {
     cpf: string;
     datanascimento: Date;
     sexo: number;
+    tipofisicoid?: number;
     tipofisico?: TipofisicoDTO | null;
+    nivelatividadeid?: number;
     nivelatividade?: NivelatividadeDTO | null;
+    objetivoid?: number;
     objetivo?: ObjetivoDTO | null;
     situacao: number;
     tipopessoaid?: number;
     tipopessoa: TipopessoaDTO;
-    contato?: ContatoDTO | null;
+    contato: ContatoDTO;
     endereco?: EnderecoDTO | null;
+    usuario: UsuarioDTO;
 }
 
 export interface TipofisicoDTO {
@@ -41,7 +45,7 @@ export interface ContatoDTO {
     pessoaid: number;
     telefone?: string | null;
     celular?: string | null;
-    email?: string | null;
+    email: string;
 }
 
 export interface EnderecoDTO {
@@ -61,4 +65,13 @@ export interface PaginatedResponse<T> {
     pageSize: number;
     total: number;
     data: T[];
+}
+
+export interface UsuarioDTO {
+    id: number;
+    pessoaid: number;
+    permissao: string;
+    usuario: string;
+    password: string;
+    dtacadastro: Date;
 }

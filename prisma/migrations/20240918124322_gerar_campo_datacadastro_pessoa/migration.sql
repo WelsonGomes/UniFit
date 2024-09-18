@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "tbpessoa" ADD COLUMN     "datacadastro" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

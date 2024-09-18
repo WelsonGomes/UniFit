@@ -2,6 +2,9 @@ import { PrismaClient } from "@prisma/client";
 import { importCityes, publicCityes } from "./execute/city";
 import { publicStates } from "./execute/state";
 import { peopleType } from "./execute/people";
+import { physicalType } from './execute/physicalType'
+import { activityLevel } from './execute/activitylevel';
+import { objective } from './execute/objective';
 import * as fs from 'fs';
 import * as path from 'path';
 import dotenv from 'dotenv';
@@ -49,6 +52,30 @@ async function main() {
         await peopleType();
     } else {
         console.log('Tipos de pessoas já cadastrado na base');
+    };
+    console.log('Verificando se já existe os tipos fisicos de pessoas');
+    const physical = await prisma.tipoFisico.count();
+    if( physical <= 0){
+        console.log('Preparando para inserir os tipos fisicos de pessoas');
+        await physicalType();
+    } else {
+        console.log('Tipos fisicos de pessoas já cadastrado na base');
+    }
+    console.log('Verificando se já existe os niveis de atividades das pessoas');
+    const activity = await prisma.nivelAtividade.count();
+    if(activity <= 0){
+        console.log('Preparando para inserir os niveis de atividades de pessoas');
+        await activityLevel();
+    } else {
+        console.log('Niveis de atividades de pessoas já cadastrado na base');
+    }
+    console.log('Verificando se já existe os objetivos das pessoas');
+    const obj = await prisma.objetivo.count();
+    if(obj <= 0){
+        console.log('Preparando para inserir os objetivos de pessoas');
+        await objective();
+    } else {
+        console.log('Objetivos de pessoas já cadastrado na base');
     }
 };
 

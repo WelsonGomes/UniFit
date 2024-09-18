@@ -19,6 +19,14 @@ app.get('/', (req, res) => {
 });
 app.post('/login');
 app.use(route);
+app.use(async (req, res, next) => {
+    console.log('Finalizando a conexão do prisma');
+    res.on('finish', async () => {
+        await req.prisma.$disconnect();
+        console.log('Conexão finalizada');
+    });
+    next();
+});
 app.listen(port, () => {
     console.log(`App Running on port ${port}`);
 });
