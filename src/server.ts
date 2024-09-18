@@ -5,6 +5,7 @@ import cors from 'cors';
 import { middleware } from './middleware';
 import { PrismaClient } from '@prisma/client';
 const route = require('./router');
+import Login from './login';
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ app.use(middleware);
 app.get('/',(req: Request, res: Response) => {
     return res.status(200).json({msg: `App Running on port ${port}`});
 });
-app.post('/login');
+app.post('/login', Login.validacao);
 app.use(route);
 app.use(async (req: Request, res: Response, next: NextFunction) => {
     console.log('Finalizando a conexão do prisma')

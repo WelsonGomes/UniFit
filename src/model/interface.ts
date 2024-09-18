@@ -75,3 +75,25 @@ export interface UsuarioDTO {
     password: string;
     dtacadastro: Date;
 }
+
+export interface LoginDTO {
+    user: string;
+    password: string;
+}
+
+export interface UsuarioLoginDTO {
+    pessoaid: number;
+    nome: string;
+    cliente: string;
+    permissao: string;
+}
+
+export function converteUsuario(usuario: any): UsuarioLoginDTO {
+    const usuarioLoginDTO: UsuarioLoginDTO = {
+        pessoaid: usuario.pessoaid,
+        nome: usuario.pessoa.nome + ' ' + usuario.pessoa.sobrenome,
+        cliente: usuario.cliente,
+        permissao: usuario.permissao
+    };
+    return usuarioLoginDTO;
+}

@@ -8,6 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const middleware_1 = require("./middleware");
 const route = require('./router');
+const login_1 = __importDefault(require("./login"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.SERVICE_PORT;
@@ -17,7 +18,7 @@ app.use(middleware_1.middleware);
 app.get('/', (req, res) => {
     return res.status(200).json({ msg: `App Running on port ${port}` });
 });
-app.post('/login');
+app.post('/login', login_1.default.validacao);
 app.use(route);
 app.use(async (req, res, next) => {
     console.log('Finalizando a conexão do prisma');
