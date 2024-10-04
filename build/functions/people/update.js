@@ -36,6 +36,11 @@ async function UpdatePeople(prisma, pessoaDTO, req, res, id) {
         if (pessoaDTO.tipopessoaid) {
             updatePeople.tipopessoaid = pessoaDTO.tipopessoaid;
         }
+        ;
+        if (pessoaDTO.professorid) {
+            updatePeople.professorid = pessoaDTO.professorid;
+        }
+        ;
         console.log(updatePeople);
         if (pessoaDTO.contato) {
             console.log('Verificando os campos a serem alterados no cadastro de contato da pessoa');
@@ -99,7 +104,6 @@ async function UpdatePeople(prisma, pessoaDTO, req, res, id) {
                     where: { situacao: 1, id: id },
                     data: updatePeople
                 });
-                //console.log(people);
             }
             let contato = null;
             if (updateData.contato) {
@@ -110,7 +114,6 @@ async function UpdatePeople(prisma, pessoaDTO, req, res, id) {
                         where: { id: c === null || c === void 0 ? void 0 : c.id },
                         data: updateData.contato
                     });
-                    //console.log(contato);
                 }
                 ;
             }
@@ -124,7 +127,6 @@ async function UpdatePeople(prisma, pessoaDTO, req, res, id) {
                         where: { id: e.id },
                         data: updateData.endereco
                     });
-                    //console.log(endereco);
                 }
             }
             return { people, contato, endereco };

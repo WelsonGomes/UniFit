@@ -15,6 +15,7 @@ export interface PessoaDTO {
     situacao: number;
     tipopessoaid?: number;
     tipopessoa: TipopessoaDTO;
+    professorid?: number | null;
     contato: ContatoDTO;
     endereco?: EnderecoDTO | null;
     usuario: UsuarioDTO;
@@ -96,4 +97,10 @@ export function converteUsuario(usuario: any): UsuarioLoginDTO {
         permissao: usuario.permissao
     };
     return usuarioLoginDTO;
+}
+
+export interface UsuarioLogadoDTO {
+    id: number;
+    nome: string;
+    token: string;
 }

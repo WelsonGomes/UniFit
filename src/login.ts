@@ -1,7 +1,7 @@
 import { Request, Response} from 'express';
 import * as auth from './auth';
 import dotenv from 'dotenv';
-import { converteUsuario, LoginDTO, UsuarioLoginDTO } from './model/interface';
+import { converteUsuario, LoginDTO, UsuarioLogadoDTO, UsuarioLoginDTO } from './model/interface';
 dotenv.config();
 
 export default class Login{
@@ -22,7 +22,12 @@ export default class Login{
                 if(await auth.compararSenha(password, usuario.password)) {
                     const result = converteUsuario(usuario);
                     const token = auth.gerarToken(result);
-                    return res.status(200).json(token);
+                    const logado: UsuarioLogadoDTO = {
+                        id: usuario.id,
+                        nome: result.nome,
+                        token: token
+                    }
+                    return res.status(200).json(logado);
                 } else {
                     return res.status(401).json({msg: "Usuário ou senha invalido."});
                 }

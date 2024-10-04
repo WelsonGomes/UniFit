@@ -25,6 +25,7 @@ model Pessoa {
   tipopessoaid Int
   tipopessoa TipoPessoa @relation(fields: [tipopessoaid], references: [id])
   datacadastro DateTime @default(now())
+  professorid Int?
   contato Contato? @relation(name: "PessoaToContato")
   endereco Endereco? @relation(name: "PessoaToEndereco")
   usuario Usuario? @relation(name: "PessoaToUsuario")

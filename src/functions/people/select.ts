@@ -64,6 +64,7 @@ async function SelectPeople(prisma: PrismaClient, req: Request, res: Response, s
                     id: dados.tipopessoa.id,
                     descricao: dados.tipopessoa.descricao
                 },
+                professorid: dados.professorid ?? null,
                 contato: {
                     id: dados.contato?.id ?? 0,
                     pessoaid: dados.contato?.pessoaid ?? 0,

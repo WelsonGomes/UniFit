@@ -43,12 +43,17 @@ class Login {
                     pessoa: true
                 }
             });
-            console.log("Autenticação para o usuário " + (usuario === null || usuario === void 0 ? void 0 : usuario.pessoa.nome) + " " + (usuario === null || usuario === void 0 ? void 0 : usuario.pessoa.sobrenome));
             if (usuario) {
+                console.log("Autenticação para o usuário " + (usuario === null || usuario === void 0 ? void 0 : usuario.pessoa.nome) + " " + (usuario === null || usuario === void 0 ? void 0 : usuario.pessoa.sobrenome));
                 if (await auth.compararSenha(password, usuario.password)) {
                     const result = (0, interface_1.converteUsuario)(usuario);
                     const token = auth.gerarToken(result);
-                    return res.status(200).json(token);
+                    const logado = {
+                        id: usuario.id,
+                        nome: result.nome,
+                        token: token
+                    };
+                    return res.status(200).json(logado);
                 }
                 else {
                     return res.status(401).json({ msg: "Usuário ou senha invalido." });

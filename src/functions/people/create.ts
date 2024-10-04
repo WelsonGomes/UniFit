@@ -51,7 +51,8 @@ async function CreatePeople(prisma: PrismaClient, pessoaDTO: PessoaDTO, req: Req
                     ...(pessoaDTO.nivelatividadeid && {nivelatividadeid: pessoaDTO.nivelatividadeid}),
                     ...(pessoaDTO.objetivoid && {objetivoid: pessoaDTO.objetivoid}),
                     situacao: pessoaDTO.situacao,
-                    tipopessoaid: tipoPessoa
+                    tipopessoaid: tipoPessoa,
+                    ...(pessoaDTO.professorid && {professorid: pessoaDTO.professorid})
                 }
             });
             let contato = await prismaTransaction.contato.create({

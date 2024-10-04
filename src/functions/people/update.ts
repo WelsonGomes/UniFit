@@ -17,7 +17,8 @@ async function UpdatePeople(prisma: PrismaClient, pessoaDTO: PessoaDTO, req: Req
         if(pessoaDTO.datanascimento){updatePeople.datanascimento = pessoaDTO.datanascimento};
         if(pessoaDTO.sexo){updatePeople.sexo = pessoaDTO.sexo};
         if(pessoaDTO.situacao){updatePeople.situacao = 0};
-        if(pessoaDTO.tipopessoaid){updatePeople.tipopessoaid = pessoaDTO.tipopessoaid}
+        if(pessoaDTO.tipopessoaid){updatePeople.tipopessoaid = pessoaDTO.tipopessoaid};
+        if(pessoaDTO.professorid){updatePeople.professorid = pessoaDTO.professorid};
         console.log(updatePeople);
         if(pessoaDTO.contato){
             console.log('Verificando os campos a serem alterados no cadastro de contato da pessoa');
@@ -50,7 +51,6 @@ async function UpdatePeople(prisma: PrismaClient, pessoaDTO: PessoaDTO, req: Req
                     where: { situacao: 1, id: id },
                     data: updatePeople
                 });
-                //console.log(people);
             }
             let contato: any = null;
             if(updateData.contato){
@@ -61,7 +61,6 @@ async function UpdatePeople(prisma: PrismaClient, pessoaDTO: PessoaDTO, req: Req
                         where: { id: c?.id },
                         data: updateData.contato
                     });
-                    //console.log(contato);
                 };
             };
             let endereco: any = null;
@@ -73,7 +72,6 @@ async function UpdatePeople(prisma: PrismaClient, pessoaDTO: PessoaDTO, req: Req
                         where: { id: e.id },
                         data: updateData.endereco
                     });
-                    //console.log(endereco);
                 }
             }
             return {people, contato, endereco};
