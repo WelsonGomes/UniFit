@@ -21,7 +21,6 @@ app.get('/', (req, res) => {
 });
 app.post('/login', login_1.default.validacao);
 app.use(auth_1.validaToken);
-console.log('Token Valido, seguindo para rotas');
 app.use(route);
 app.use(async (req, res, next) => {
     console.log('Finalizando a conexão do prisma');

@@ -101,6 +101,7 @@ model Usuario {
   usuario String @db.VarChar(50)
   password String
   dtacadastro DateTime
+  situacao Int @default(1)
 
   @@map("tbusuario")
 }
@@ -126,4 +127,16 @@ model Cidade {
 
   @@unique([nome, estadoid])
   @@map("tbcidade")
+}
+
+model Exercicio {
+  id Int @id @default(autoincrement())
+  nome String @db.VarChar(100)
+  descricao String
+  execucao String
+  equipamento String?
+  grupomuscular String
+  imagemurl String?
+
+  @@map("tbexercicio")
 }

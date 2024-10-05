@@ -75,6 +75,7 @@ export interface UsuarioDTO {
     usuario: string;
     password: string;
     dtacadastro: Date;
+    situacao: number;
 }
 
 export interface LoginDTO {
@@ -103,4 +104,13 @@ export interface UsuarioLogadoDTO {
     id: number;
     nome: string;
     token: string;
+}
+
+export interface ExercicioDTO {
+    nome: string;
+    descricao: string;
+    execucao: string;
+    equipamento?: string | null;
+    grupomuscular: string;
+    imagemurl?: string | null;
 }

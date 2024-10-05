@@ -100,7 +100,8 @@ async function SelectPeople(prisma: PrismaClient, req: Request, res: Response, s
                     permissao: dados.usuario?.permissao ?? "",
                     usuario: "",
                     password: "",
-                    dtacadastro: dados.usuario?.dtacadastro ?? new Date(Date.now())
+                    dtacadastro: dados.usuario?.dtacadastro ?? new Date(Date.now()),
+                    situacao: dados.usuario?.situacao ?? 0
                 }
             }
         });

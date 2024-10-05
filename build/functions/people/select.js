@@ -41,7 +41,7 @@ async function SelectPeople(prisma, req, res, skip, take, id, type) {
         ;
         console.log('Processando os dados para retorno');
         const pessoa = people.map((dados) => {
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
             return {
                 id: dados.id,
                 codigo: dados.codigo,
@@ -103,7 +103,8 @@ async function SelectPeople(prisma, req, res, skip, take, id, type) {
                     permissao: (_t = (_s = dados.usuario) === null || _s === void 0 ? void 0 : _s.permissao) !== null && _t !== void 0 ? _t : "",
                     usuario: "",
                     password: "",
-                    dtacadastro: (_v = (_u = dados.usuario) === null || _u === void 0 ? void 0 : _u.dtacadastro) !== null && _v !== void 0 ? _v : new Date(Date.now())
+                    dtacadastro: (_v = (_u = dados.usuario) === null || _u === void 0 ? void 0 : _u.dtacadastro) !== null && _v !== void 0 ? _v : new Date(Date.now()),
+                    situacao: (_x = (_w = dados.usuario) === null || _w === void 0 ? void 0 : _w.situacao) !== null && _x !== void 0 ? _x : 0
                 }
             };
         });
