@@ -9,7 +9,7 @@ async function SelectUser(prisma, req, res, skip, take, id) {
     try {
         skip = (skip - 1) * take;
         console.log("Buscando o total de registro na base");
-        const total = await prisma.usuario.count();
+        const total = await prisma.usuario.count({ where: { situacao: 1 } });
         console.log('Buscando os dados do(s) usuário(s)');
         const user = await prisma.usuario.findMany({
             where: Object.assign({ situacao: 1 }, (id && { id })),

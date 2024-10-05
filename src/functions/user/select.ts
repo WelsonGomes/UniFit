@@ -12,7 +12,7 @@ async function SelectUser(prisma: PrismaClient, req: Request, res: Response, ski
 
         console.log("Buscando o total de registro na base");
 
-        const total = await prisma.usuario.count();
+        const total = await prisma.usuario.count({ where: { situacao: 1 }});
 
         console.log('Buscando os dados do(s) usuário(s)');
 
