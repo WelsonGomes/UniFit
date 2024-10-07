@@ -16,6 +16,7 @@ dotenv_1.default.config();
 async function createExercise(req, res) {
     try {
         const pessoaDTO = req.body;
+        console.log(req.prisma);
         const create = await (0, create_1.default)(req.prisma, pessoaDTO, req, res);
         return create;
     }
