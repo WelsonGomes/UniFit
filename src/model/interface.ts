@@ -5,14 +5,14 @@ export interface PessoaDTO {
     sobrenome: string;
     cpf: string;
     datanascimento: Date;
-    sexo: number;
+    sexo?: string | null;
     tipofisicoid?: number;
     tipofisico?: TipofisicoDTO | null;
     nivelatividadeid?: number;
     nivelatividade?: NivelatividadeDTO | null;
     objetivoid?: number;
     objetivo?: ObjetivoDTO | null;
-    situacao: number;
+    situacao: string;
     tipopessoaid?: number;
     tipopessoa: TipopessoaDTO;
     professorid?: number | null;
@@ -103,6 +103,7 @@ export function converteUsuario(usuario: any): UsuarioLoginDTO {
 export interface UsuarioLogadoDTO {
     id: number;
     nome: string;
+    tipo: string;
     token: string;
 }
 

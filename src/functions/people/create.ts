@@ -46,11 +46,11 @@ async function CreatePeople(prisma: PrismaClient, pessoaDTO: PessoaDTO, req: Req
                     sobrenome: pessoaDTO.sobrenome,
                     cpf: pessoaDTO.cpf.replace(/[^\d]+/g, ''),
                     datanascimento: new Date(pessoaDTO.datanascimento),
-                    sexo: pessoaDTO.sexo,
+                    sexo: pessoaDTO.sexo === 'Masculino' ? 1 : pessoaDTO.sexo === 'Feminino' ? 2 : 0,
                     ...(pessoaDTO.tipofisicoid && {tipofisicoid: pessoaDTO.tipofisicoid}),
                     ...(pessoaDTO.nivelatividadeid && {nivelatividadeid: pessoaDTO.nivelatividadeid}),
                     ...(pessoaDTO.objetivoid && {objetivoid: pessoaDTO.objetivoid}),
-                    situacao: pessoaDTO.situacao,
+                    situacao: 1,
                     tipopessoaid: tipoPessoa,
                     ...(pessoaDTO.professorid && {professorid: pessoaDTO.professorid})
                 }
