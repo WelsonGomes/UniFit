@@ -48,7 +48,7 @@ async function SelectPeople(prisma, req, res, skip, take, id, type) {
                 nome: dados.nome,
                 sobrenome: dados.sobrenome,
                 cpf: dados.cpf,
-                sexo: dados.sexo,
+                sexo: dados.sexo === 1 ? 'Masculino' : dados.sexo === 2 ? 'Feminino' : null,
                 datanascimento: dados.datanascimento,
                 tipofisico: dados.tipofisico ? {
                     id: dados.tipofisico.id,
@@ -62,7 +62,7 @@ async function SelectPeople(prisma, req, res, skip, take, id, type) {
                     id: dados.objetivo.id,
                     descricao: dados.objetivo.descricao
                 } : null,
-                situacao: dados.situacao,
+                situacao: dados.situacao === 1 ? 'Ativo' : 'Inativo',
                 tipopessoa: {
                     id: dados.tipopessoa.id,
                     descricao: dados.tipopessoa.descricao

@@ -12,7 +12,7 @@ async function SelectExercise(prisma: PrismaClient, req: Request, res: Response,
 
         console.log("Buscando o total de registro na base");
 
-        const total = await prisma.exercicio.count();
+        const total = await prisma.exercicio.count({ where: {id: { gt: 0 } } });
 
         console.log('Buscando os dados do(s) exercício(s)');
 

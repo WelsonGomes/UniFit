@@ -51,6 +51,7 @@ class Login {
                     const logado = {
                         id: usuario.id,
                         nome: result.nome,
+                        tipo: result.permissao,
                         token: token
                     };
                     return res.status(200).json(logado);

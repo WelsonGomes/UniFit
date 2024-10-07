@@ -45,7 +45,7 @@ async function CreatePeople(prisma, pessoaDTO, req, res) {
         console.log('Abrindo transação com o banco de dados para persisitencia dos dados');
         const response = await prisma.$transaction(async (prismaTransaction) => {
             const pessoa = await prismaTransaction.pessoa.create({
-                data: Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ codigo: pessoaDTO.codigo, nome: pessoaDTO.nome, sobrenome: pessoaDTO.sobrenome, cpf: pessoaDTO.cpf.replace(/[^\d]+/g, ''), datanascimento: new Date(pessoaDTO.datanascimento), sexo: pessoaDTO.sexo }, (pessoaDTO.tipofisicoid && { tipofisicoid: pessoaDTO.tipofisicoid })), (pessoaDTO.nivelatividadeid && { nivelatividadeid: pessoaDTO.nivelatividadeid })), (pessoaDTO.objetivoid && { objetivoid: pessoaDTO.objetivoid })), { situacao: pessoaDTO.situacao, tipopessoaid: tipoPessoa }), (pessoaDTO.professorid && { professorid: pessoaDTO.professorid }))
+                data: Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ codigo: pessoaDTO.codigo, nome: pessoaDTO.nome, sobrenome: pessoaDTO.sobrenome, cpf: pessoaDTO.cpf.replace(/[^\d]+/g, ''), datanascimento: new Date(pessoaDTO.datanascimento), sexo: pessoaDTO.sexo === 'Masculino' ? 1 : pessoaDTO.sexo === 'Feminino' ? 2 : 0 }, (pessoaDTO.tipofisicoid && { tipofisicoid: pessoaDTO.tipofisicoid })), (pessoaDTO.nivelatividadeid && { nivelatividadeid: pessoaDTO.nivelatividadeid })), (pessoaDTO.objetivoid && { objetivoid: pessoaDTO.objetivoid })), { situacao: 1, tipopessoaid: tipoPessoa }), (pessoaDTO.professorid && { professorid: pessoaDTO.professorid }))
             });
             let contato = await prismaTransaction.contato.create({
                 data: {
