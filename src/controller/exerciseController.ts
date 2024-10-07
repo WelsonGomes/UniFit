@@ -10,6 +10,7 @@ dotenv.config();
 async function createExercise(req: Request, res: Response){
     try {
         const pessoaDTO = req.body;
+        console.log(req.prisma);
         const create = await CreateExercise(req.prisma, pessoaDTO, req, res);
         return create;
     } catch (error) {
