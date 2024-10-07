@@ -115,3 +115,7 @@ export interface ExercicioDTO {
     grupomuscular: string;
     imagemurl?: string | null;
 }
+
+export interface TreinoDTO {
+    
+}
