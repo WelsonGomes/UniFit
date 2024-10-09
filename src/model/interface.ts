@@ -117,5 +117,33 @@ export interface ExercicioDTO {
 }
 
 export interface TreinoDTO {
-    
+    id: number;
+    pessoaid: number;
+    fichaid: number;
+    dtinicio: Date;
+    dtfim: Date;
+    tipotreino: number;
+    descricao: string;
+    treinoexercicio: TreinoExercicioDTO[];
+}
+
+export interface TreinoExercicioDTO {
+    id: number;
+    treinoid: number;
+    exercicioid: number;
+    descanso: number;
+    desexercicio: string;
+    numero: number;
+    repeticoes: number;
+    series: number;
+    tempo: number;
+    conjugado: boolean;
+    letratreino: string;
+    itemsagrupado: ItemsAgrupadosDTO[];
+}
+
+export interface ItemsAgrupadosDTO {
+    id: number;
+    treinoexercicioid: number;
+    agrupado: number;
 }

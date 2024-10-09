@@ -29,6 +29,7 @@ model Pessoa {
   contato Contato? @relation(name: "PessoaToContato")
   endereco Endereco? @relation(name: "PessoaToEndereco")
   usuario Usuario? @relation(name: "PessoaToUsuario")
+  treino Treino[]
 
   @@map("tbpessoa")
 }
@@ -137,6 +138,49 @@ model Exercicio {
   equipamento String?
   grupomuscular String
   imagemurl String?
+  treinoexercicio TreinoExercicio[]
 
   @@map("tbexercicio")
+}
+
+model Treino {
+  id BigInt @id @default(autoincrement())
+  pessoaid Int
+  pessoa Pessoa @relation(fields: [pessoaid], references: [id])
+  fichaid Int
+  dtinicio DateTime
+  dtfim DateTime
+  tipotreino Int
+  descricao String
+  treinoexercicio TreinoExercicio[]
+
+  @@map("tbtreino")
+}
+
+model TreinoExercicio {
+  id BigInt @id @default(autoincrement())
+  treinoid BigInt
+  treino Treino @relation(fields: [treinoid], references: [id])
+  exercicioid Int
+  exercicio Exercicio @relation(fields: [exercicioid], references: [id])
+  descanso Int
+  desexercicio String
+  numero Int
+  repeticoes Int
+  series Int
+  tempo Int
+  conjugado Boolean
+  letratreino String @db.Char(1)
+  itemsagrupados ItemsAgrupados[]
+
+  @@map("tbtreinoexercicio")
+}
+
+model ItemsAgrupados {
+  id BigInt @id @default(autoincrement())
+  treinoexercicioid BigInt
+  treinoexercicio TreinoExercicio @relation(fields: [treinoexercicioid], references: [id])
+  agrupado Int
+
+  @@map("tbitemsagrupado")
 }
